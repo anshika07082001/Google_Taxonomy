@@ -28,19 +28,25 @@ const Taxonomy = () => {
     };
     // Function selects the value and renders on the basis of selected value
     const select1Handler =(str:string,obj:any,index:number,e:any)=>{
-        if(Object.keys(obj).length>0){
-            if(index<dataArr.length){
+        console.log(index)
+        if(obj!==undefined){
+            if(Object.keys(obj).length>0){
+                if(index<dataArr.length){
+                    dataArr.splice(index+1)
+                }
+                setMsg('')
+                dataArr.push({name:str,listObj:obj})
+            }
+            else{
+                setMsg('No Further categories found')
+                if(index<dataArr.length)
                 dataArr.splice(index+1)
             }
-            setMsg('')
-            dataArr.push({name:str,listObj:obj})
+            setDataArr([...dataArr])
         }
         else{
-            setMsg('No Further categories found')
-            if(index<dataArr.length)
-            dataArr.splice(index+1)
+
         }
-        setDataArr([...dataArr])
     }
 
     return (
@@ -49,7 +55,7 @@ const Taxonomy = () => {
         {/* Renders the ParentCategory Data */}
         {dataArr.map((x:any,index:number)=>
         <select onChange={(e)=>select1Handler(e.target.value,x.listObj[e.target.value],index,e)} className='p-2 fs-4 mt-2 rounded-pill bg-primary-subtle'>
-            <option>Select</option>
+            <option hidden>Select</option>
             {Object.keys(x.listObj).map((ele,i)=>{
                 return <option key={ele}>{ele}</option>
             })}
