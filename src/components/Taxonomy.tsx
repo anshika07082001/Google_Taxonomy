@@ -49,6 +49,7 @@ const Taxonomy = () => {
         {/* Renders the ParentCategory Data */}
         {dataArr.map((x:any,index:number)=>
         <select onChange={(e)=>select1Handler(e.target.value,x.listObj[e.target.value],index,e)} className='p-2 fs-4 mt-2 rounded-pill bg-primary-subtle'>
+            <option>Select</option>
             {Object.keys(x.listObj).map((ele,i)=>{
                 return <option key={ele}>{ele}</option>
             })}
